@@ -58,7 +58,7 @@ This is a simple e-commerce application built with Flask, MongoDB, and Google OA
     MONGODB_URI=mongodb+srv://your_username:your_password@your_cluster.mongodb.net/your_database?retryWrites=true&w=majority
     GOOGLE_CLIENT_ID=your_google_client_id
     GOOGLE_CLIENT_SECRET=your_google_client_secret
-    
+
     * Replace the placeholders with your actual values.
     
 6. **Create a client_secrets.json file:**
