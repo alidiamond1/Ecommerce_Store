@@ -59,7 +59,7 @@ This is a simple e-commerce application built with Flask, MongoDB, and Google OA
     GOOGLE_CLIENT_ID=your_google_client_id
     GOOGLE_CLIENT_SECRET=your_google_client_secret
     
-    *Replace the placeholders with your actual values.
+    * Replace the placeholders with your actual values.
     
 6. **Create a client_secrets.json file:**
    * Download the client_secrets.json file from the Google Cloud Console.
