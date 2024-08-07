@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mx-auto px-4">
+    <h1 class="text-4xl font-bold text-center my-8">Welcome to Our E-commerce Store</h1>
+    
+    <div class="text-center mb-8">
+        <p class="text-xl mb-4">Discover amazing products at great prices!</p>
+        <a href="{{ url_for('products') }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+            Browse Products
+        </a>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div class="bg-white p-6 rounded-lg shadow-md">
+            <h2 class="text-2xl font-semibold mb-4">Featured Products</h2>
+            <p>Check out our latest and most popular items!</p>
+            <!-- You can add a few featured products here -->
+        </div>
+
+        <div class="bg-white p-6 rounded-lg shadow-md">
+            <h2 class="text-2xl font-semibold mb-4">Special Offers</h2>
+            <p>Don't miss out on our current deals and discounts!</p>
+            <!-- You can add some special offers or promotions here -->
+        </div>
+    </div>
+
+    {% if current_user.is_authenticated %}
+    <div class="text-center mt-8">
+        <p class="text-xl mb-4">Welcome back, {{ current_user.username }}!</p>
+        <a href="{{ url_for('view_cart') }}" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
+            View Your Cart
+        </a>
+    </div>
+    {% else %}
+    <div class="text-center mt-8">
+        <p class="text-xl mb-4">New here? Join us today!</p>
+        <a href="{{ url_for('register') }}" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded mr-4">
+            Register
+        </a>
+        <a href="{{ url_for('login') }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+            Login
+        </a>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

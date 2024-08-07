@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Export Reports - Admin Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100">
+    <div class="min-h-screen flex">
+        <aside class="bg-indigo-700 text-white w-64 min-h-screen p-4">
+            <h1 class="text-2xl font-semibold mb-6">Admin Dashboard</h1>
+            <nav>
+                <ul class="space-y-2">
+                    <li><a href="{{ url_for('index') }}" class="block py-2 px-4 rounded hover:bg-indigo-600 transition duration-200"><i class="fas fa-home mr-2"></i>Home</a></li>
+                    <li><a href="{{ url_for('manage_users') }}" class="block py-2 px-4 rounded hover:bg-indigo-600 transition duration-200"><i class="fas fa-users mr-2"></i>Manage Users</a></li>
+                    <li><a href="{{ url_for('products') }}" class="block py-2 px-4 rounded hover:bg-indigo-600 transition duration-200"><i class="fas fa-box mr-2"></i>Manage Products</a></li>
+                    <li><a href="#" class="block py-2 px-4 rounded hover:bg-indigo-600 transition duration-200"><i class="fas fa-shopping-cart mr-2"></i>View Orders</a></li>
+                    <li><a href="{{ url_for('logout') }}" class="block py-2 px-4 rounded hover:bg-indigo-600 transition duration-200"><i class="fas fa-sign-out-alt mr-2"></i>Logout</a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="flex-1 p-8">
+            <h2 class="text-3xl font-semibold mb-6">Export Reports</h2>
+            
+            <div class="bg-white rounded-lg shadow-md p-6">
+                <form action="{{ url_for('export_reports') }}" method="POST" class="space-y-6">
+                    <!-- Report Type Selection -->
+                    <div>
+                        <label for="report_type" class="block text-sm font-medium text-gray-700 mb-2">Select Report Type</label>
+                        <select id="report_type" name="report_type" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md">
+                            <option value="sales">Sales Report</option>
+                            <option value="inventory">Inventory Report</option>
+                            <option value="customers">Customer Report</option>
+                            <option value="products">Product Performance Report</option>
+                        </select>
+                    </div>
+
+                    <!-- Date Range -->
+                    <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
+                        <div>
+                            <label for="start_date" class="block text-sm font-medium text-gray-700 mb-2">Start Date</label>
+                            <input type="date" id="start_date" name="start_date" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                        </div>
+                        <div>
+                            <label for="end_date" class="block text-sm font-medium text-gray-700 mb-2">End Date</label>
+                            <input type="date" id="end_date" name="end_date" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                        </div>
+                    </div>
+
+                    <!-- File Format -->
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">File Format</label>
+                        <div class="mt-2 space-x-4">
+                            <label class="inline-flex items-center">
+                                <input type="radio" class="form-radio" name="file_format" value="csv" checked>
+                                <span class="ml-2">CSV</span>
+                            </label>
+                            <label class="inline-flex items-center">
+                                <input type="radio" class="form-radio" name="file_format" value="xlsx">
+                                <span class="ml-2">Excel (XLSX)</span>
+                            </label>
+                            <label class="inline-flex items-center">
+                                <input type="radio" class="form-radio" name="file_format" value="pdf">
+                                <span class="ml-2">PDF</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Additional Options -->
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Additional Options</label>
+                        <div class="mt-2 space-y-2">
+                            <label class="inline-flex items-center">
+                                <input type="checkbox" class="form-checkbox" name="include_charts">
+                                <span class="ml-2">Include charts and graphs</span>
+                            </label>
+                            <label class="inline-flex items-center">
+                                <input type="checkbox" class="form-checkbox" name="include_summary">
+                                <span class="ml-2">Include executive summary</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Submit Button -->
+                    <div>
+                        <button type="submit" class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                            Generate Report
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Recently Generated Reports -->
+            <div class="mt-8 bg-white rounded-lg shadow-md p-6">
+                <h3 class="text-xl font-semibold mb-4">Recently Generated Reports</h3>
+                <ul class="divide-y divide-gray-200">
+                    {% for report in recent_reports %}
+                    <li class="py-4 flex justify-between items-center">
+                        <div>
+                            <p class="text-sm font-medium text-gray-900">{{ report.name }}</p>
+                            <p class="text-sm text-gray-500">Generated on: {{ report.date }}</p>
+                        </div>
+                        <a href="{{ report.download_url }}" class="text-indigo-600 hover:text-indigo-900">Download</a>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </main>
+    </div>
+
+    <footer class="bg-gray-800 text-white text-center py-4 mt-8">
+        <p>&copy; 2023 Your E-commerce Store. All rights reserved.</p>
+    </footer>
+</body>
+</html>
