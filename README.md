@@ -70,9 +70,8 @@ This is a simple e-commerce application built with Flask, MongoDB, and Google OA
 **Run the application:**
  **Start the Python development server:**
     ```bash
-   python app.py
-   **Access the application:**
-   *Open your web browser and navigate to http://127.0.0.1:5000/.
+      python app.py
+  
 
 
 
