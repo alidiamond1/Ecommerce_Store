@@ -68,9 +68,6 @@ This is a simple e-commerce application built with Flask, MongoDB, and Google OA
    ## **Run the application:**
    ```bash
           python app.py
-  
-
-
 
 ## Usage
 
