@@ -66,7 +66,7 @@ This is a simple e-commerce application built with Flask, MongoDB, and Google OA
    * Place it in the project root directory.
 
    ## **Run the application:**
-         ```bash
+   ```bash
           python app.py
   
 
