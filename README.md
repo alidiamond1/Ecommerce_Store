@@ -65,9 +65,9 @@ This is a simple e-commerce application built with Flask, MongoDB, and Google OA
    * Download the client_secrets.json file from the Google Cloud Console.
    * Place it in the project root directory.
 
-**Run the application:**
-    ```bash
-            python app.py
+   ## **Run the application:**
+         ```bash
+          python app.py
   
 
 
